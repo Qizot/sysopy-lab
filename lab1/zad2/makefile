@@ -2,7 +2,7 @@
 CC = gcc -Wall -std=c11 -ggdb
 
 
-all: static shared clean
+all: static shared zad2_static clean 
 
 static:
 	$(CC) -c library.c
@@ -15,8 +15,6 @@ shared:
 zad2_static:
 	make static
 	$(CC) -o test main.c library.a -I .
-	# works :)
-	make tests
 
 clean:
 	rm -f *.o

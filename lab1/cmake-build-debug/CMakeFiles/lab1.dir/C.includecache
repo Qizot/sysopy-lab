@@ -17,4 +17,10 @@ library.h
 /home/jakub/Projects/sysopy-lab/lab1/library.h
 string.h
 -
+sys/times.h
+-
+time.h
+-
+zconf.h
+-
 

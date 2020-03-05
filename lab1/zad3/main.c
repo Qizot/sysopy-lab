@@ -23,10 +23,6 @@ void print_time(char* header, clock_t real[2], struct tms* tms_time) {
     printf("\n\n");
 }
 
-char* create_tmp_file_from_pair(char* pair) {
-
-}
-
 
 int main(int argc, char** argv) {
 
@@ -59,7 +55,7 @@ int main(int argc, char** argv) {
             int len = 0;
             char** files = calloc(1000, sizeof(char*));
 
-            while(file = strtok(NULL, " ")) {
+            while((file = strtok(NULL, " "))) {
                 files[len] = file;
                 len += 1;
             }
@@ -69,7 +65,7 @@ int main(int argc, char** argv) {
                 char* firstfile = strtok(files[i], ":");
                 char* secondfile = strtok(NULL, "\n");
                 char* tmp_file = create_diff_file(firstfile, secondfile);
-                int idx = add_edit_block(manager, tmp_file);
+                add_edit_block(manager, tmp_file);
             }
             real_time[1] = times(&tms_time[1]);
             print_time("add_edit_block", real_time, tms_time);

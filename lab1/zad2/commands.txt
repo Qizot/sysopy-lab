@@ -1,0 +1,5 @@
+create_table 10
+compare_pairs a.txt:b.txt b.txt:a.txt a.txt:b.txt
+remove_block 2
+remove_operation 0 1
+compare_pairs a.txt:b.txt
