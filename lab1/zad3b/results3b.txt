@@ -1,0 +1,678 @@
+OPTIMIZATION LEVEL, 1
+
+
+======== TEST STATIC
+
+
+SMALL TEST
+
+create_table
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+add_edit_block
+real time    user time    sys time
+0.030000   0.000000   0.000000 
+
+delete_edit_block
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+add_edit_block
+real time    user time    sys time
+0.010000   0.000000   0.000000 
+
+MEDIUM TEST
+
+create_table
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+add_edit_block
+real time    user time    sys time
+0.070000   0.000000   0.010000 
+
+delete_edit_block
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+add_edit_block
+real time    user time    sys time
+0.020000   0.000000   0.000000 
+
+delete_edit_block
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+BIG TEST
+
+create_table
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+add_edit_block
+real time    user time    sys time
+0.280000   0.040000   0.010000 
+
+delete_edit_block
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+delete_edit_block
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+delete_edit_block
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+add_edit_block
+real time    user time    sys time
+0.020000   0.010000   0.000000 
+
+delete_edit_block
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+
+
+======== TEST DYNAMIC
+
+
+SMALL TEST
+
+create_table
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+add_edit_block
+real time    user time    sys time
+0.030000   0.000000   0.000000 
+
+delete_edit_block
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+add_edit_block
+real time    user time    sys time
+0.010000   0.000000   0.000000 
+
+MEDIUM TEST
+
+create_table
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+add_edit_block
+real time    user time    sys time
+0.070000   0.000000   0.010000 
+
+delete_edit_block
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+add_edit_block
+real time    user time    sys time
+0.010000   0.000000   0.000000 
+
+delete_edit_block
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+BIG TEST
+
+create_table
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+add_edit_block
+real time    user time    sys time
+0.290000   0.040000   0.010000 
+
+delete_edit_block
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+delete_edit_block
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+delete_edit_block
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+add_edit_block
+real time    user time    sys time
+0.030000   0.010000   0.000000 
+
+delete_edit_block
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+
+
+======== TEST SHARED
+
+
+SMALL TEST
+
+create_table
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+add_edit_block
+real time    user time    sys time
+0.030000   0.000000   0.000000 
+
+delete_edit_block
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+add_edit_block
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+MEDIUM TEST
+
+create_table
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+add_edit_block
+real time    user time    sys time
+0.070000   0.010000   0.000000 
+
+delete_edit_block
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+add_edit_block
+real time    user time    sys time
+0.010000   0.000000   0.000000 
+
+delete_edit_block
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+BIG TEST
+
+create_table
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+add_edit_block
+real time    user time    sys time
+0.250000   0.030000   0.020000 
+
+delete_edit_block
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+delete_edit_block
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+delete_edit_block
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+add_edit_block
+real time    user time    sys time
+0.030000   0.010000   0.000000 
+
+delete_edit_block
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+OPTIMIZATION LEVEL, 2
+
+
+======== TEST STATIC
+
+
+SMALL TEST
+
+create_table
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+add_edit_block
+real time    user time    sys time
+0.030000   0.000000   0.000000 
+
+delete_edit_block
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+add_edit_block
+real time    user time    sys time
+0.010000   0.000000   0.000000 
+
+MEDIUM TEST
+
+create_table
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+add_edit_block
+real time    user time    sys time
+0.070000   0.000000   0.010000 
+
+delete_edit_block
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+add_edit_block
+real time    user time    sys time
+0.010000   0.000000   0.000000 
+
+delete_edit_block
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+BIG TEST
+
+create_table
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+add_edit_block
+real time    user time    sys time
+0.250000   0.030000   0.020000 
+
+delete_edit_block
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+delete_edit_block
+real time    user time    sys time
+0.010000   0.000000   0.000000 
+
+delete_edit_block
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+add_edit_block
+real time    user time    sys time
+0.010000   0.000000   0.000000 
+
+delete_edit_block
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+
+
+======== TEST DYNAMIC
+
+
+SMALL TEST
+
+create_table
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+add_edit_block
+real time    user time    sys time
+0.030000   0.000000   0.000000 
+
+delete_edit_block
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+add_edit_block
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+MEDIUM TEST
+
+create_table
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+add_edit_block
+real time    user time    sys time
+0.060000   0.000000   0.010000 
+
+delete_edit_block
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+add_edit_block
+real time    user time    sys time
+0.020000   0.000000   0.000000 
+
+delete_edit_block
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+BIG TEST
+
+create_table
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+add_edit_block
+real time    user time    sys time
+0.290000   0.050000   0.010000 
+
+delete_edit_block
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+delete_edit_block
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+delete_edit_block
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+add_edit_block
+real time    user time    sys time
+0.030000   0.010000   0.010000 
+
+delete_edit_block
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+
+
+======== TEST SHARED
+
+
+SMALL TEST
+
+create_table
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+add_edit_block
+real time    user time    sys time
+0.030000   0.000000   0.000000 
+
+delete_edit_block
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+add_edit_block
+real time    user time    sys time
+0.010000   0.000000   0.000000 
+
+MEDIUM TEST
+
+create_table
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+add_edit_block
+real time    user time    sys time
+0.080000   0.000000   0.010000 
+
+delete_edit_block
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+add_edit_block
+real time    user time    sys time
+0.010000   0.000000   0.000000 
+
+delete_edit_block
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+BIG TEST
+
+create_table
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+add_edit_block
+real time    user time    sys time
+0.290000   0.040000   0.020000 
+
+delete_edit_block
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+delete_edit_block
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+delete_edit_block
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+add_edit_block
+real time    user time    sys time
+0.030000   0.000000   0.010000 
+
+delete_edit_block
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+OPTIMIZATION LEVEL, 3
+
+
+======== TEST STATIC
+
+
+SMALL TEST
+
+create_table
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+add_edit_block
+real time    user time    sys time
+0.040000   0.000000   0.000000 
+
+delete_edit_block
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+add_edit_block
+real time    user time    sys time
+0.010000   0.000000   0.000000 
+
+MEDIUM TEST
+
+create_table
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+add_edit_block
+real time    user time    sys time
+0.080000   0.000000   0.010000 
+
+delete_edit_block
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+add_edit_block
+real time    user time    sys time
+0.010000   0.000000   0.010000 
+
+delete_edit_block
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+BIG TEST
+
+create_table
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+add_edit_block
+real time    user time    sys time
+0.270000   0.040000   0.010000 
+
+delete_edit_block
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+delete_edit_block
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+delete_edit_block
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+add_edit_block
+real time    user time    sys time
+0.030000   0.010000   0.000000 
+
+delete_edit_block
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+
+
+======== TEST DYNAMIC
+
+
+SMALL TEST
+
+create_table
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+add_edit_block
+real time    user time    sys time
+0.030000   0.000000   0.000000 
+
+delete_edit_block
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+add_edit_block
+real time    user time    sys time
+0.000000   0.000000   0.010000 
+
+MEDIUM TEST
+
+create_table
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+add_edit_block
+real time    user time    sys time
+0.060000   0.000000   0.010000 
+
+delete_edit_block
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+add_edit_block
+real time    user time    sys time
+0.010000   0.000000   0.000000 
+
+delete_edit_block
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+BIG TEST
+
+create_table
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+add_edit_block
+real time    user time    sys time
+0.270000   0.040000   0.010000 
+
+delete_edit_block
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+delete_edit_block
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+delete_edit_block
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+add_edit_block
+real time    user time    sys time
+0.040000   0.010000   0.000000 
+
+delete_edit_block
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+
+
+======== TEST SHARED
+
+
+SMALL TEST
+
+create_table
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+add_edit_block
+real time    user time    sys time
+0.050000   0.000000   0.000000 
+
+delete_edit_block
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+add_edit_block
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+MEDIUM TEST
+
+create_table
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+add_edit_block
+real time    user time    sys time
+0.070000   0.000000   0.010000 
+
+delete_edit_block
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+add_edit_block
+real time    user time    sys time
+0.010000   0.000000   0.000000 
+
+delete_edit_block
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+BIG TEST
+
+create_table
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+add_edit_block
+real time    user time    sys time
+0.270000   0.040000   0.010000 
+
+delete_edit_block
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+delete_edit_block
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+delete_edit_block
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+add_edit_block
+real time    user time    sys time
+0.030000   0.010000   0.000000 
+
+delete_edit_block
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+

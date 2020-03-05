@@ -1,0 +1,4 @@
+Flagi optymalizacji pomogły nieznacznie w przypadku większego testu gdzie analizowana była
+większa ilość plików.
+
+Spodziewać się można było, że najszybsze okazało się wykorzystanie biblioteki statycznej, potem współdzielonej a na samym końcu dynamicznej

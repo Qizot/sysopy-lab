@@ -1,7 +1,7 @@
 //
 // Created by jakub on 04.03.2020.
 //
-
+#define  _GNU_SOURCE
 #include <stdio.h>
 #include <stdlib.h>
 #include "library.h"
