@@ -1,0 +1,76 @@
+================
+// MAŁY TEST
+================
+
+create_table
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+add_edit_block
+real time    user time    sys time
+0.030000   0.000000   0.000000 
+
+delete_edit_block
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+add_edit_block
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+================
+// ŚREDNI TEST
+================
+
+create_table
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+add_edit_block
+real time    user time    sys time
+0.080000   0.010000   0.010000 
+
+delete_edit_block
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+add_edit_block
+real time    user time    sys time
+0.010000   0.000000   0.000000 
+
+delete_edit_block
+real time    user time    sys time
+0.000000   0.000000   0.000000
+
+================
+// POTĘŻNY TEST
+================
+
+create_table
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+add_edit_block
+real time    user time    sys time
+0.280000   0.030000   0.020000 
+
+delete_edit_block
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+delete_edit_block
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+delete_edit_block
+real time    user time    sys time
+0.000000   0.000000   0.000000 
+
+add_edit_block
+real time    user time    sys time
+0.030000   0.010000   0.000000 
+
+delete_edit_block
+real time    user time    sys time
+0.000000   0.000000   0.000000
+

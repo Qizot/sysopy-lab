@@ -1,0 +1,4 @@
+create_table 10
+compare_pairs test_files/e.txt:test_files/a.txt test_files/d.txt:test_files/d.txt test_files/f.txt:test_files/f.txt test_files/c.txt:test_files/d.txt test_files/d.txt:test_files/d.txt
+remove_block 0
+compare_pairs test_files/a.txt:test_files/b.txt

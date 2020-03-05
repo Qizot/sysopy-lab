@@ -1,7 +1,7 @@
 CC = gcc -Wall -std=c11 -ggdb
 
 
-all: static shared clean
+all: static shared test_dynamic clean
 
 static:
 	$(CC) -c library.c
@@ -18,30 +18,11 @@ test_static:
 	make static
 	$(CC) -o test main.c library.a -I .
 	# works :)
-	make tests
 
 test_dynamic:
 	make shared
-	$(CC) -o test main_dynamic.c -I .
-	# works :)
-	make tests
+	$(CC) -o test dynamic_main.c -ldl library.a -I .
 
 test_shared:
 	make shared
 	$(CC) -o test main.c -L. library.so -I .
-	# works :)
-	make tests
-
-
-tests:
-	# static
-	./test  301231 43 static
-	./test  620000 51 static  find 5402300
-	./test  620000 33 static  change 200000
-	./test  600000 32 static  change_alt 123123
-	
-	# dynamic
-	./test  301231 43 dynamic
-	./test  620000 51 dynamic  find 5402300
-	./test  620000 33 dynamic  change 200000
-	./test  600000 32 dynamic  change_alt 123123

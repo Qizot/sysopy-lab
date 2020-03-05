@@ -67,6 +67,9 @@ int main(int argc, char** argv) {
                 char* tmp_file = create_diff_file(firstfile, secondfile);
                 add_edit_block(manager, tmp_file);
             }
+
+            free(files);
+
             real_time[1] = times(&tms_time[1]);
             print_time("add_edit_block", real_time, tms_time);
         }
