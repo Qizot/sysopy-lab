@@ -1,5 +1,5 @@
 CC = gcc -Wall -std=c11 -ggdb
-
+export LD_LIBRARY_PATH=./
 
 all: static shared test clean
 
@@ -28,34 +28,33 @@ test_shared:
 	$(CC) -o test main.c -L. library.so -I . -O$(Olevel)
 
 test:
-
 	echo 'OPTIMIZATION LEVEL', '$(Olevel)\n\n' >> results3b.txt
 
 	make test_static
 	echo '======== TEST STATIC\n\n' >> results3b.txt
 	echo 'SMALL TEST\n' >> results3b.txt
-	./test < test_files/small_test.txt >> results3b.txt
+	cat test_files/small_test.txt | xargs ./test >> results3b.txt
 	echo 'MEDIUM TEST\n' >> results3b.txt
-	./test < test_files/medium_test.txt >> results3b.txt
+	cat test_files/medium_test.txt | xargs ./test >> results3b.txt
 	echo 'BIG TEST\n' >> results3b.txt
-	./test < test_files/big_test.txt >> results3b.txt
+	cat test_files/big_test.txt | xargs ./test >> results3b.txt
 	
 	echo '\n\n======== TEST DYNAMIC\n\n' >> results3b.txt
 	make test_dynamic
 	echo 'SMALL TEST\n' >> results3b.txt
-	./test < test_files/small_test.txt >> results3b.txt
+	cat test_files/small_test.txt | xargs ./test >> results3b.txt
 	echo 'MEDIUM TEST\n' >> results3b.txt
-	./test < test_files/medium_test.txt >> results3b.txt
+	cat test_files/medium_test.txt | xargs ./test >> results3b.txt
 	echo 'BIG TEST\n' >> results3b.txt
-	./test < test_files/big_test.txt >> results3b.txt
+	cat test_files/big_test.txt | xargs ./test >> results3b.txt
 	
 	echo '\n\n======== TEST SHARED\n\n' >> results3b.txt
 	make test_shared
-	export LD_LIBRARY_PATH=./
+
 	echo 'SMALL TEST\n' >> results3b.txt
-	./test < test_files/small_test.txt >> results3b.txt
+	cat test_files/small_test.txt | xargs ./test >> results3b.txt
 	echo 'MEDIUM TEST\n' >> results3b.txt
-	./test < test_files/medium_test.txt >> results3b.txt
+	cat test_files/medium_test.txt | xargs ./test >> results3b.txt
 	echo 'BIG TEST\n' >> results3b.txt
-	./test < test_files/big_test.txt >> results3b.txt
+	cat test_files/big_test.txt | xargs ./test >> results3b.txt
 

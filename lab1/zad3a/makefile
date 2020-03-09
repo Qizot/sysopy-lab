@@ -1,4 +1,6 @@
 CC = gcc -Wall -std=c11 -ggdb
+export LD_LIBRARY_PATH=./
+
 
 
 all: static shared test clean
@@ -32,28 +34,33 @@ test:
 	make test_static
 	echo '======== TEST STATIC\n\n' >> results3a.txt
 	echo 'SMALL TEST\n' >> results3a.txt
-	./test < test_files/small_test.txt >> results3a.txt
+	cat test_files/small_test.txt | xargs ./test >> results3a.txt
+
 	echo 'MEDIUM TEST\n' >> results3a.txt
-	./test < test_files/medium_test.txt >> results3a.txt
+	cat test_files/medium_test.txt | xargs ./test >> results3a.txt
+
 	echo 'BIG TEST\n' >> results3a.txt
-	./test < test_files/big_test.txt >> results3a.txt
+	cat test_files/big_test.txt | xargs ./test >> results3a.txt
 	
 	echo '\n\n======== TEST DYNAMIC\n\n' >> results3a.txt
 	make test_dynamic
 	echo 'SMALL TEST\n' >> results3a.txt
-	./test < test_files/small_test.txt >> results3a.txt
+	cat test_files/small_test.txt | xargs ./test >> results3a.txt
+
 	echo 'MEDIUM TEST\n' >> results3a.txt
-	./test < test_files/medium_test.txt >> results3a.txt
+	cat test_files/medium_test.txt | xargs ./test >> results3a.txt
+
 	echo 'BIG TEST\n' >> results3a.txt
-	./test < test_files/big_test.txt >> results3a.txt
+	cat test_files/big_test.txt | xargs ./test >> results3a.txt
 	
 	echo '\n\n======== TEST SHARED\n\n' >> results3a.txt
 	make test_shared
-	export LD_LIBRARY_PATH=./
 	echo 'SMALL TEST\n' >> results3a.txt
-	./test < test_files/small_test.txt >> results3a.txt
+	cat test_files/small_test.txt | xargs ./test >> results3a.txt
+
 	echo 'MEDIUM TEST\n' >> results3a.txt
-	./test < test_files/medium_test.txt >> results3a.txt
+	cat test_files/medium_test.txt | xargs ./test >> results3a.txt
+
 	echo 'BIG TEST\n' >> results3a.txt
-	./test < test_files/big_test.txt >> results3a.txt
+	cat test_files/big_test.txt | xargs ./test >> results3a.txt
 
