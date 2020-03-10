@@ -13,7 +13,7 @@ double calculate_time(clock_t start, clock_t end) {
 
 #define ASSERT_ARGC(n) \
     if (n >= argc) { \
-        fprintf(stderr, "argc exceeded\n"); \
+        fprintf(stderr, "%d %d argc exceeded\n", n, argc); \
         exit(EXIT_FAILURE); \
     } \
 
@@ -48,10 +48,10 @@ double calculate_time(clock_t start, clock_t end) {
 
 int check_mode(char* m) {
     if (strcmp(m, "sys") == 0) {
-        return LIB;
+        return SYS;
     }
     if (strcmp(m, "lib") == 0) {
-        return SYS;
+        return LIB;
     }
     return -1;
 }
@@ -84,15 +84,15 @@ void generate(char* filename, int lines, int chars) {
 }
 
 
-int lib_sort(char *path, int line, int len) {
+int lib_sort(char *path, int lines, int len) {
     FILE *file = fopen(path, "r+");
     char *reg1 = calloc(len + 1, sizeof(char));
     char *reg2 = calloc(len + 1, sizeof(char));
 
     long int offset = (long int) ((len + 1) * sizeof(char));
-    for (int i = 0; i < line; i++) {
-        fseek(file, i * offset, SEEK_SET); // 0 offset from beg
-        if (fread(reg1, sizeof(char), line + 1, file) != (len + 1)) { // ill formed file, should have lines * (len + 1) characters
+    for (int i = 0; i < lines; i++) {
+        fseek(file, i * offset, 0); // 0 offset from beg
+        if (fread(reg1, sizeof(char),len + 1, file) != (len + 1)) { // ill formed file, should have lines * (len + 1) characters
             return 1;
         }
 
@@ -123,7 +123,7 @@ int lib_sort(char *path, int line, int len) {
     return 0;
 }
 
-int sys_sort(char *path, int line, int len) {
+int sys_sort(char *path, int lines, int len) {
     int file = open(path, O_RDWR);
 
     char *reg1 = calloc(len + 1, sizeof(char));
@@ -132,7 +132,7 @@ int sys_sort(char *path, int line, int len) {
     long int offset = (long int) ((len + 1) * sizeof(char));
     int bytes = sizeof(char) * (len + 1);
 
-    for (int i = 0; i < line; i++) {
+    for (int i = 0; i < lines; i++) {
         lseek(file, i * offset, SEEK_SET); // SEEK_SET - from beg
 
         if (read(file, reg1, bytes) != (len + 1)) {
@@ -228,7 +228,6 @@ int copy(char *path, char *dest, int lines, int len, int mode) {
 
 int main(int argc, char** argv) {
     srand(time(0));
-
     int i = 1;
     if (strcmp(argv[i], "generate") == 0) {
         ASSERT_ARGC(i + 3)
@@ -243,7 +242,6 @@ int main(int argc, char** argv) {
         char *file = argv[i + 2];
         int lines = atoi(argv[i + 3]);
         int chars = atoi(argv[i + 4]);
-
         START_MEASUREMENT("Sorting files")
         sort(file, lines, chars, mode);
         END_MEASUREMENT()

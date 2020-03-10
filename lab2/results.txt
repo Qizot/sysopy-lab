@@ -1,0 +1,276 @@
+
+
+lines  458  size  1
+
+LIB
+Sorting files
+real    user    sys
+0.140000   0.070000   0.060000 
+
+SYS
+Sorting files
+real    user    sys
+0.170000   0.090000   0.070000 
+
+LIB
+Copying files
+real    user    sys
+0.000000   0.000000   0.000000 
+
+SYS
+Copying files
+real    user    sys
+0.000000   0.000000   0.000000 
+
+
+lines  755  size  1
+
+LIB
+Sorting files
+real    user    sys
+0.290000   0.170000   0.110000 
+
+SYS
+Sorting files
+real    user    sys
+0.410000   0.210000   0.190000 
+
+LIB
+Copying files
+real    user    sys
+0.000000   0.000000   0.000000 
+
+SYS
+Copying files
+real    user    sys
+0.000000   0.000000   0.000000 
+
+
+lines  1018  size  4
+
+LIB
+Sorting files
+real    user    sys
+0.470000   0.290000   0.170000 
+
+SYS
+Sorting files
+real    user    sys
+0.710000   0.360000   0.340000 
+
+LIB
+Copying files
+real    user    sys
+0.000000   0.000000   0.000000 
+
+SYS
+Copying files
+real    user    sys
+0.000000   0.000000   0.000000 
+
+
+lines  105  size  4
+
+LIB
+Sorting files
+real    user    sys
+0.020000   0.000000   0.010000 
+
+SYS
+Sorting files
+real    user    sys
+0.020000   0.000000   0.010000 
+
+LIB
+Copying files
+real    user    sys
+0.000000   0.000000   0.000000 
+
+SYS
+Copying files
+real    user    sys
+0.000000   0.000000   0.000000 
+
+
+lines  743  size  512
+
+LIB
+Sorting files
+real    user    sys
+0.320000   0.150000   0.150000 
+
+SYS
+Sorting files
+real    user    sys
+0.400000   0.180000   0.210000 
+
+LIB
+Copying files
+real    user    sys
+0.000000   0.000000   0.000000 
+
+SYS
+Copying files
+real    user    sys
+0.000000   0.000000   0.000000 
+
+
+lines  1027  size  512
+
+LIB
+Sorting files
+real    user    sys
+0.550000   0.290000   0.240000 
+
+SYS
+Sorting files
+real    user    sys
+0.750000   0.350000   0.380000 
+
+LIB
+Copying files
+real    user    sys
+0.000000   0.000000   0.000000 
+
+SYS
+Copying files
+real    user    sys
+0.000000   0.000000   0.000000 
+
+
+lines  962  size  1024
+
+LIB
+Sorting files
+real    user    sys
+0.550000   0.300000   0.240000 
+
+SYS
+Sorting files
+real    user    sys
+0.680000   0.330000   0.330000 
+
+LIB
+Copying files
+real    user    sys
+0.000000   0.000000   0.000000 
+
+SYS
+Copying files
+real    user    sys
+0.000000   0.000000   0.000000 
+
+
+lines  436  size  1024
+
+LIB
+Sorting files
+real    user    sys
+0.160000   0.080000   0.060000 
+
+SYS
+Sorting files
+real    user    sys
+0.160000   0.060000   0.090000 
+
+LIB
+Copying files
+real    user    sys
+0.000000   0.000000   0.000000 
+
+SYS
+Copying files
+real    user    sys
+0.000000   0.000000   0.000000 
+
+
+lines  219  size  4096
+
+LIB
+Sorting files
+real    user    sys
+0.090000   0.020000   0.060000 
+
+SYS
+Sorting files
+real    user    sys
+0.060000   0.010000   0.030000 
+
+LIB
+Copying files
+real    user    sys
+0.000000   0.000000   0.000000 
+
+SYS
+Copying files
+real    user    sys
+0.000000   0.000000   0.000000 
+
+
+lines  263  size  4096
+
+LIB
+Sorting files
+real    user    sys
+0.120000   0.040000   0.060000 
+
+SYS
+Sorting files
+real    user    sys
+0.070000   0.030000   0.040000 
+
+LIB
+Copying files
+real    user    sys
+0.000000   0.000000   0.000000 
+
+SYS
+Copying files
+real    user    sys
+0.000000   0.000000   0.000000 
+
+
+lines  932  size  8192
+
+LIB
+Sorting files
+real    user    sys
+1.530000   0.600000   0.930000 
+
+SYS
+Sorting files
+real    user    sys
+1.010000   0.340000   0.660000 
+
+LIB
+Copying files
+real    user    sys
+0.020000   0.000000   0.000000 
+
+SYS
+Copying files
+real    user    sys
+0.020000   0.000000   0.010000 
+
+
+lines  716  size  8192
+
+LIB
+Sorting files
+real    user    sys
+0.930000   0.370000   0.560000 
+
+SYS
+Sorting files
+real    user    sys
+0.610000   0.180000   0.410000 
+
+LIB
+Copying files
+real    user    sys
+0.010000   0.000000   0.000000 
+
+SYS
+Copying files
+real    user    sys
+0.020000   0.000000   0.000000 
