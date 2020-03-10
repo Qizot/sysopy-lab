@@ -1,5 +1,5 @@
 CC = gcc -Wall -std=c11 -ggdb
-
+export LD_LIBRARY_PATH=./
 
 all: static shared test clean
 
