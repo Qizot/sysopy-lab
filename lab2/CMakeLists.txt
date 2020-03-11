@@ -3,4 +3,9 @@ project(lab2 C)
 
 set(CMAKE_C_STANDARD 11)
 
-add_executable(lab2 main.c)
+include_directories(.)
+
+add_executable(lab2
+        lib.c
+        lib.h
+        main.c)
