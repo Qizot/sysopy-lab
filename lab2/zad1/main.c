@@ -84,85 +84,118 @@ void generate(char* filename, int lines, int chars) {
 }
 
 
-int lib_sort(char *path, int lines, int len) {
-    FILE *file = fopen(path, "r+");
-    char *reg1 = calloc(len + 1, sizeof(char));
-    char *reg2 = calloc(len + 1, sizeof(char));
+int load_lib_line(FILE* file, int line, int len, char* buf) {
+    long int offset = (len + 1) * sizeof(char);
+    fseek(file, line * offset, 0);
+    return fread(buf, sizeof(char), len + 1, file);
+}
 
-    long int offset = (long int) ((len + 1) * sizeof(char));
-    for (int i = 0; i < lines; i++) {
-        fseek(file, i * offset, 0); // 0 offset from beg
-        if (fread(reg1, sizeof(char),len + 1, file) != (len + 1)) { // ill formed file, should have lines * (len + 1) characters
-            return 1;
-        }
+int write_lib_line(FILE* file, int line, int len, char* buf) {
+    long int offset = (len + 1) * sizeof(char);
+    fseek(file, line * offset, 0);
+    return fwrite(buf, sizeof(char), len + 1, file);
+}
 
-        for (int j = 0; j < i; j++) {
-            fseek(file, j * offset, 0);
-            if (fread(reg2, sizeof(char), (len + 1), file) != (len + 1)) {
-                return 1;
-            }
-            if (reg2[0] > reg1[0]) {
-                fseek(file, j * offset, 0);
-                if (fwrite(reg1, sizeof(char), (len + 1), file) != (len + 1)) {
-                    return 1;
-                }
-                fseek(file, i * offset, 0);
-                if (fwrite(reg2, sizeof(char), (len + 1), file) != (len + 1)) {
-                    return 1;
-                }
-                char *tmp = reg1;
-                reg1 = reg2;
-                reg2 = tmp;
-            }
+int load_sys_line(int file, int line, int len, char* buf) {
+    long int offset = (len + 1) * sizeof(char);
+    lseek(file, line * offset, SEEK_SET);
+    return read(file, buf, offset);
+}
+
+int write_sys_line(int file, int line, int len, char* buf) {
+
+    long int offset = (len + 1) * sizeof(char);
+    lseek(file, line * offset, SEEK_SET);
+    return write(file, buf, offset);
+}
+
+int partition_lib(FILE* file, char* line, char* pivot, int low, int high, int len) {
+    int i = low - 1;
+    // load pivot as the last element
+    load_lib_line(file, high, len, pivot);
+    // perform partition
+    for (int j = low; j < high; j++) {
+        load_lib_line(file, j, len, line);
+        if (line[0] < pivot[0]) {
+            i++;
+            load_lib_line(file, i, len, pivot);
+            write_lib_line(file, j, len, pivot);
+            write_lib_line(file, i, len, line);
+            // load back pivot
+            load_lib_line(file, high, len, pivot);
         }
     }
+    load_lib_line(file, i + 1, len, line);
+    write_lib_line(file, i + 1, len, pivot);
+    write_lib_line(file, high, len, line);
+    return i + 1;
+}
 
-    fclose(file);
-    free(reg1);
-    free(reg2);
+int partition_sys(int file, char* line, char* pivot, int low, int high, int len) {
+    int i = low - 1;
+    // load pivot as the last element
+    load_sys_line(file, high, len, pivot);
+    // perform partition
+    for (int j = low; j < high; j++) {
+        load_sys_line(file, j, len, line);
+        if (line[0] < pivot[0]) {
+            i++;
+            load_sys_line(file, i, len, pivot);
+            write_sys_line(file, j, len, pivot);
+            write_sys_line(file, i, len, line);
+            // load back pivot
+            load_sys_line(file, high, len, pivot);
+        }
+    }
+    load_sys_line(file, i + 1, len, line);
+    write_sys_line(file, i + 1, len, pivot);
+    write_sys_line(file, high, len, line);
+    return i + 1;
+}
+
+void lib_quicksort(FILE* file, char* line, char* pivot, int low, int high, int len) {
+    if (low < high)
+    {
+        int pi = partition_lib(file, line, pivot, low, high, len);
+
+        lib_quicksort(file, line, pivot, low, pi - 1, len);
+        lib_quicksort(file, line, pivot, pi + 1, high, len);
+    }
+}
+
+void sys_quicksort(int file, char* line, char* pivot, int low, int high, int len) {
+    if (low < high)
+    {
+        int pi = partition_sys(file, line, pivot, low, high, len);
+
+        sys_quicksort(file, line, pivot, low, pi - 1, len);
+        sys_quicksort(file, line, pivot, pi + 1, high, len);
+    }
+}
+
+int lib_sort(char *path, int lines, int len) {
+    FILE *file = fopen(path, "r+");
+    char *line = calloc(len + 1, sizeof(char));
+    char *pivot = calloc(len + 1, sizeof(char));
+
+    lib_quicksort(file, line, pivot, 0, lines - 1, len);
+
+    free(line);
+    free(pivot);
     return 0;
 }
 
 int sys_sort(char *path, int lines, int len) {
     int file = open(path, O_RDWR);
 
-    char *reg1 = calloc(len + 1, sizeof(char));
-    char *reg2 = calloc(len + 1, sizeof(char));
+    char *line = calloc(len + 1, sizeof(char));
+    char *pivot = calloc(len + 1, sizeof(char));
 
-    long int offset = (long int) ((len + 1) * sizeof(char));
-    int bytes = sizeof(char) * (len + 1);
-
-    for (int i = 0; i < lines; i++) {
-        lseek(file, i * offset, SEEK_SET); // SEEK_SET - from beg
-
-        if (read(file, reg1, bytes) != (len + 1)) {
-            return 1;
-        }
-
-        for (int j = 0; j < i; j++) {
-            lseek(file, j * offset, SEEK_SET);
-            if (read(file, reg2, bytes) != (len + 1)) {
-                return 1;
-            }
-            if (reg2[0] > reg1[0]) {
-                lseek(file, j * offset, 0);
-                if (write(file, reg1, bytes) != (len + 1)) {
-                    return 1;
-                }
-                lseek(file, i * offset, 0);
-                if (write(file, reg2, bytes) != (len + 1)) {
-                    return 1;
-                }
-                char *tmp = reg1;
-                reg1 = reg2;
-                reg2 = tmp;
-            }
-        }
-    }
+    sys_quicksort(file, line, pivot, 0, lines - 1, len);
 
     close(file);
-    free(reg1);
-    free(reg2);
+    free(line);
+    free(pivot);
     return 0;
 }
 
