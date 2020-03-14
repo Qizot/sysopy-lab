@@ -3,7 +3,7 @@ sizes=(1 4 512 1024 4096 8192);
 for size in "${sizes[@]}"
 do
   # first main
-  lines=$(($RANDOM % 1000 + 100 | bc));
+  lines=$(($RANDOM % 10000 + 1000 | bc));
   ./main generate tmp1.txt $lines $size
   cp tmp1.txt tmp2.txt
 
