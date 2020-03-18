@@ -15,16 +15,16 @@ void generate_matrixes(char* first_file, char* second_file, int min, int max) {
 
     for (int i = 0; i < m; i++) {
         for (int j = 0; j < n; j++) {
-            fprintf(first, "%d ", rand() % value_max + value_min);
+            fprintf(first, "%d ", rand() % (value_max - value_min) + value_min);
         }
-        if (i + 1 < m)
+        // if (i + 1 < m)
             fprintf(first, "\n");
     }
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < m; j++) {
-            fprintf(second, "%d ", rand() % value_max + value_min);
+            fprintf(second, "%d ", rand() % (value_max - value_min) + value_min);
         }
-        if (i + 1 < n)
+        // if (i + 1 < n)
             fprintf(second, "\n");
     }
     fclose(first);

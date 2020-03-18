@@ -20,7 +20,4 @@ C = load_matrix(third)
 print(A.shape, B.shape)
 
 D = A.dot(B)
-file = open("d.txt", "w")
-for i in range(len(D)):
-    file.write(" ".join([str(n) for n in D[i]]) + "\n")
-file.close()
+print((C == D).all())

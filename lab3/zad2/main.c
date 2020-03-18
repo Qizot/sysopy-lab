@@ -1,6 +1,7 @@
 #define _GNU_SOURCE 500
 #include <stdio.h>
 #include <string.h>
+#include <time.h>
 #include <sys/types.h>
 #include <unistd.h>
 #include <stdlib.h>
@@ -9,7 +10,7 @@
 #include <errno.h>
 #include "multiplication.h"
 
-pid_t create_fork(int idx, int max_idx, char* first_file, char* second_file, int timeout, int mode, char* output_file) {
+pid_t create_fork(int idx, int max_idx, char* first_file, char* second_file, time_t timeout, int mode, char* output_file) {
     pid_t child_pid = fork();
     if (child_pid == 0) {
         char out[80];
@@ -43,7 +44,7 @@ void concat_tmp_files(int processes, char* output_file) {
 
         char* args[processes + 3];
         args[0] = "paste";
-        args[1] = "-d'\0'";
+        args[1] = "-d\\0";
         args[processes + 2] = 0;
         for (int i = 0; i < processes; i++) {
             char* filename = calloc(100, sizeof(char));
@@ -74,23 +75,29 @@ int main(int argc, char** argv) {
     int mode = parse_mode(argv[4]);
     if (mode == TMP_FILE) {
         system("mkdir tmp_files");
+    } else if (mode == SHARED_FILE) {
+        char cmd[200] = "> ";
+        strcat(cmd, C_matrix);
+        system(cmd);
     }
 
 
     pid_t *children = calloc(processes, sizeof(pid_t));
-
+    time_t current_time = time(NULL);
     for (int i = 0; i < processes; i++) {
-        children[i] = create_fork(i, processes, A_matrix, B_matrix, timeout, mode, C_matrix);
+        children[i] = create_fork(i, processes, A_matrix, B_matrix, current_time + timeout, mode, C_matrix);
     }
 
     for (int i = 0; i < processes; i++) {
         int status;
         waitpid(children[i], &status, 0);
-        printf("Proces %d wykonał %d mnożeń macierzy\n", children[i], WEXITSTATUS(status));
+        printf("Proces %d wykonał %d mnożeń macierzy\n", children[i], status);
     }
     if (mode == TMP_FILE) {
         concat_tmp_files(processes, C_matrix);
     }
+
     free(children);
+
     return 0;
 }
