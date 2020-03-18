@@ -160,8 +160,6 @@ int multiplicate_matrix(int idx, int max_idx, char* first_file, char* second_fil
     for (int i = 0; i < a_n; i++) {
         C[i] = calloc((to - from),  sizeof(int));
     }
-    // int C[n][to - from + 1];
-    int multiplications = 0;
 
     for (int i = 0; i < a_n; i++) {
         for (int j = 0; j < a_m; j++) {
@@ -185,17 +183,14 @@ int multiplicate_matrix(int idx, int max_idx, char* first_file, char* second_fil
                 int b = B[j][k];
                 sum += a * b;
             }
-            multiplications += b_n;
             C[i][k - from] = sum;
         }
         current_time = time(NULL);
         if (current_time > timeout) {
-            printf("Process %d has timed out, multiplications: %d but expected: %d\n", getpid(), multiplications, a_n * b_n * (to - from));
-            goto write_to_file;
+            goto exit_without_saving;
         }
     }
 
-    write_to_file:
     if (mode == TMP_FILE) {
         write_tmp_file(output_file, C, a_n, to - from);
     } else if (mode == SHARED_FILE) {
@@ -214,5 +209,8 @@ int multiplicate_matrix(int idx, int max_idx, char* first_file, char* second_fil
 
     fclose(A_file);
     fclose(B_file);
-    return multiplications;
+    return 1;
+
+    exit_without_saving:
+    return 0;
 }
