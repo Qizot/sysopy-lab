@@ -18,7 +18,6 @@
 #define RT 3
 
 int count = 0;
-int sender_pid = -1;
 
 int get_mode(char* mode) {
 
@@ -34,43 +33,38 @@ int get_mode(char* mode) {
     return -1;
 }
 
-void count_function(int sig, siginfo_t *info, void *context) {
-    count = count + 1;
-    sender_pid = info->si_pid;
+void on_kill_receive(int sig, siginfo_t *info, void *context) {
+   count += 1;
+   kill(info->si_pid, SIGUSR1);
+}
+
+void on_queue_receive(int sig, siginfo_t *info, void *context) {
+    union sigval value;
+    value.sival_int = count;
+    sigqueue(info->si_pid, SIGUSR1, value);
+    count += 1;
+}
+
+void on_rt_receive(int sig, siginfo_t *info, void *context) {
+    count += 1;
+    kill(info->si_pid, SIGRTMIN);
 }
 
 void on_kill_end(int sig, siginfo_t *info, void *context) {
-    if (sender_pid != -1) {
-        for (int i = 0; i < count; i++) {
-            kill(sender_pid, SIGUSR1);
-        }
-        kill(sender_pid, SIGUSR2);
-    }
-    printf("Catcher: received %d signals \n",count);
+    kill(info->si_pid, SIGUSR2);
+    printf("Catcher: received %d signals \n", count);
     exit(0);
 }
 
-void on_queue_end(int sig, siginfo_t *info, void* context) {
-    printf("received signal to kill %d\n", info->si_signo);
+void on_queue_end(int sig, siginfo_t *info, void *context) {
     union sigval value;
-    if (sender_pid != -1) {
-        for (int i = 0; i < count; i++) {
-            value.sival_int = i;
-            sigqueue(sender_pid, SIGUSR1, value);
-        }
-        value.sival_int = count;
-        sigqueue(sender_pid, SIGUSR2, value);
-    }
-    printf("Catcher: received %d signals \n",count);
+    value.sival_int = count;
+    sigqueue(info->si_pid, SIGUSR2, value);
+    printf("Catcher: received %d signals \n", count);
     exit(0);
 }
-void on_rt_end(int sig, siginfo_t *info, void* context) {
-    if (sender_pid != -1) {
-        for (int i = 0; i < count; i++) {
-            kill(sender_pid, SIGRTMIN);
-        }
-        kill(sender_pid, SIGRTMIN+1);
-    }
+void on_rt_end(int sig, siginfo_t *info, void *context) {
+    kill(info->si_pid, SIGRTMIN+1);
     printf("Catcher: received %d signals \n",count);
     exit(0);
 }
@@ -83,15 +77,21 @@ void set_count_handler(int mode) {
 
     switch(mode) {
         case KILL:
+            action.sa_sigaction = &on_kill_receive;
+            if (sigaction(SIGUSR1,&action,NULL) != 0) {
+                printf("got error while sigaction\n:");
+                exit(-1);
+            }
+            break;
         case QUEUE:
-            action.sa_sigaction = &count_function;
+            action.sa_sigaction = &on_queue_receive;
             if (sigaction(SIGUSR1,&action,NULL) != 0) {
                 printf("got error while sigaction\n:");
                 exit(-1);
             }
             break;
         case RT:
-            action.sa_sigaction = &count_function;
+            action.sa_sigaction = &on_rt_receive;
             sigaddset(&action.sa_mask,SIGRTMIN+1);
             if (sigaction(SIGRTMIN,&action,NULL) != 0) {
                 printf("got error while sigaction\n");
@@ -162,3 +162,4 @@ int main(int argc, char **argv) {
     }
     return 0;
 }
+
