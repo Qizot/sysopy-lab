@@ -1,0 +1,11 @@
+Fork:
+ - handler: child process dziedziczy handler po rodzicu, sygnał wysyłany przez siebie w rodzicu nie jest przekazywany do dziecka, tak samo sygnał z dziecka nie trafia do rodzica
+ - ignore: child process dziedziczy ignorowanie sygnału
+ - mask: child process dziedziczy maskowanie po rodzicu
+ - pending: sygnał który jest pending w rodzicu nie jest pending w dziecku
+
+Exec:
+ - handler: child process nie otrzymuje handlera po rodzicu
+ - ignore: child process dziedziczy ignorowanie po rodzicu
+ - mask: child process dziedziczy maskowanie po rodzicu
+ - pending: sygnał który jest pending w rodzicu nie jest pending w dziecku
