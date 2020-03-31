@@ -1,0 +1,3 @@
+ls -l | grep mar | head -n 1 | wc
+ls -l | grep mar | head -n 1 | wc -l
+ls -l | grep mar | head -n 1 | wc -c
