@@ -19,14 +19,14 @@ char* create_producer_file(char c, int n) {
 int main() {
     char* fifo = "/tmp/tmp_fifo";
 
-    // if (mkfifo(fifo, 0666) != 0) {
-    //     perror("failed to create fifo");
-    //     exit(EXIT_FAILURE);
-    // }
+    if (mkfifo(fifo, 0666) != 0) {
+        perror("failed to create fifo");
+        // exit(EXIT_FAILURE);
+    }
 
     pid_t consumer = fork();
     if (consumer == 0) {
-        // execlp("./consumer", "./consumer", "results.txt", "100", NULL);
+        execl("./consumer", "./consumer", fifo, "results.txt", "100", NULL);
         exit(EXIT_SUCCESS);
     }
 
@@ -39,7 +39,7 @@ int main() {
       char* file = create_producer_file(c, N * 3);
       pid_t child = fork();
       if (child == 0) {
-         execlp("./producer", "./producer", fifo, file, "50", NULL);
+         execl("./producer", "./producer", fifo, file, "50", NULL);
          exit(EXIT_SUCCESS);
       }
       children[c - 'A'] = child;
@@ -52,6 +52,7 @@ int main() {
     }
 
     sleep(2);
+    kill(consumer, SIGINT);
     waitpid(consumer, NULL, 0);
 
     return 0;

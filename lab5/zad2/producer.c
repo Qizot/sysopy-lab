@@ -19,30 +19,30 @@ int main(int argc, char **argv) {
     int N = atoi(argv[3]);
     char* buffer = calloc(N + 1, sizeof(char));
 
-    FILE* file = fopen(filename, "r");
-    FILE *pipe = fopen(pipename, "r+");
-    if (pipe == NULL) {
+    int file = open(filename, O_RDONLY);
+    int pipe = open(pipename, O_WRONLY);
+    if (pipe == -1) {
         puts("failed to open pipe");
         exit(EXIT_FAILURE);
     }
-    if (file == NULL) {
+    if (file == -1) {
         puts("failed to open file");
         exit(EXIT_FAILURE);
     }
 
     int len = 0;
-    while((len = fread(buffer, sizeof(char), N, file)) > 0) {
+    while((len = read(file, buffer, N)) > 0) {
         sleep(rand() % 2 + 1);
         char str[N + 20];
         sprintf(str, "#%d#", getpid());
         strncat(str, buffer, len);
-        fwrite(str, sizeof(char), strlen(str), pipe);
-        fflush(pipe);
+        strcat(str, "\n");
+        write(pipe, str, strlen(str));
     }
 
 
-    fclose(pipe);
-    fclose(file);
+    close(pipe);
+    close(file);
 
     free(buffer);
     return 0;
