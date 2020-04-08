@@ -1,0 +1,1 @@
+/usr/bin/gcc -g   CMakeFiles/zad1.dir/chat_utils.c.o CMakeFiles/zad1.dir/client.c.o CMakeFiles/zad1.dir/main.c.o CMakeFiles/zad1.dir/server.c.o  -o zad1 

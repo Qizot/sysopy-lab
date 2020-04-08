@@ -1,0 +1,40 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/jakub/Projects/sysopy-lab/lab6/zad1/chat_utils.h
+sys/types.h
+-
+sys/ipc.h
+-
+
+/home/jakub/Projects/sysopy-lab/lab6/zad1/message.h
+sys/types.h
+-
+
+/home/jakub/Projects/sysopy-lab/lab6/zad1/server.c
+message.h
+/home/jakub/Projects/sysopy-lab/lab6/zad1/message.h
+chat_utils.h
+/home/jakub/Projects/sysopy-lab/lab6/zad1/chat_utils.h
+stdio.h
+-
+stdlib.h
+-
+unistd.h
+-
+sys/types.h
+-
+sys/ipc.h
+-
+sys/msg.h
+-
+signal.h
+-
+string.h
+-
+

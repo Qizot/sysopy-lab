@@ -1,0 +1,1 @@
+/usr/bin/gcc -g   CMakeFiles/client.dir/client.c.o CMakeFiles/client.dir/chat_utils.c.o  -o client 
