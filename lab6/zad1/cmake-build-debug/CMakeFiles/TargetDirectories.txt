@@ -1,4 +1,0 @@
-/home/jakub/Projects/sysopy-lab/lab6/zad1/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/jakub/Projects/sysopy-lab/lab6/zad1/cmake-build-debug/CMakeFiles/client.dir
-/home/jakub/Projects/sysopy-lab/lab6/zad1/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/jakub/Projects/sysopy-lab/lab6/zad1/cmake-build-debug/CMakeFiles/server.dir
