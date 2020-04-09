@@ -1,7 +1,3 @@
-//
-// Created by przjab98 on 27.04.19.
-//
-
 #include <stdlib.h>
 #include <stdio.h>
 #include <sys/msg.h>
@@ -85,9 +81,9 @@ int main() {
     signal(SIGINT, _exit);
     atexit(exit_cleanup);
 
-    if ((server_queue = msgget(getServerQueueKey(), 0)) == -1)
+    if ((server_queue = msgget(get_server_queue_key(), 0)) == -1)
         raise_detailed_error("Error while opening server queue");
-    if ((client_queue = msgget(getClientQueueKey(), IPC_CREAT | IPC_EXCL | 0666)) == -1)
+    if ((client_queue = msgget(get_client_queue_key(), IPC_CREAT | IPC_EXCL | 0666)) == -1)
         raise_detailed_error("Error while creating client queue");
 
     init();
@@ -99,13 +95,6 @@ int main() {
             continue;
         parse_and_execute_command(line);
     }
-    puts("KURWA MAC");
-    if (msgctl(client_queue, IPC_RMID, NULL) == -1)
-        raise_detailed_error("Error while deleting queue");
-    else
-        printf("\033[1;35mClient:\033[0m Queue has been deleted \n");
-
-    return 0;
 }
 
 

@@ -14,8 +14,6 @@
 #define LETTER 'a'
 #define MAX_CLIENTS 1000
 #define MAX_MSG_LENGTH 500
-#define MAX_COMMAND_LENGTH 500
-#define SPLITTER ":"
 #define COMMAND_TYPES 7
 
 struct msg {
@@ -35,9 +33,9 @@ enum MSG_COMMAND {
     ECHO = 6L,
 };
 
-key_t getServerQueueKey();
+key_t get_server_queue_key();
 
-key_t getClientQueueKey();
+key_t get_client_queue_key();
 
 void raise_error(char *msg);
 void raise_detailed_error(char* msg);

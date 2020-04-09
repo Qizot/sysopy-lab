@@ -16,9 +16,9 @@ void connect(int clientID, char msg[MAX_MSG_LENGTH]);
 
 void disconnect(int clientID);
 
-void executeCommands(struct msg *msg);
+void execute_command(struct msg *msg);
 
-void sendMessage(enum MSG_COMMAND type, char msg[MAX_MSG_LENGTH], int clientID);
+void send_message(enum MSG_COMMAND type, char *msg, int clientID);
 
 
 int working = 1;
@@ -66,14 +66,14 @@ int main() {
     act.sa_flags = 0;
     sigaction(SIGINT, &act, NULL);
 
-    if ((server_queue = msgget(getServerQueueKey(), IPC_CREAT | 0666)) == -1)
+    if ((server_queue = msgget(get_server_queue_key(), IPC_CREAT | 0666)) == -1)
         raise_detailed_error("Error while creating server queue");
 
     struct msg msgBuff;
     while (working) {
         if (msgrcv(server_queue, &msgBuff, MSGSZ, -COMMAND_TYPES, 0) == -1)
             raise_detailed_error("Error while receiving message");
-        executeCommands(&msgBuff);
+        execute_command(&msgBuff);
         usleep(500 * 1000);
     }
 
@@ -85,7 +85,7 @@ int main() {
     return 0;
 }
 
-void executeCommands(struct msg *msg) {
+void execute_command(struct msg *msg) {
     printf("\033[1;31mServer:\033[0m server has received new message \n");
     long type = msg->mType;
     switch (type) {
@@ -109,7 +109,7 @@ void executeCommands(struct msg *msg) {
     }
 }
 
-void sendMessage(enum MSG_COMMAND type, char msg[MAX_MSG_LENGTH], int clientID) {
+void send_message(enum MSG_COMMAND type, char *msg, int clientID) {
     if (clientID >= MAX_CLIENTS || clientID < 0 || clients[clientID].client_queue < 0) {
         raise_error("Error while sending message to client, client doesn't exist\n");
     }
@@ -149,16 +149,19 @@ void init(int clientPID, char msg[MAX_MSG_LENGTH]) {
 
     char toClient[MAX_MSG_LENGTH];
     sprintf(toClient, "%d", id);
-    sendMessage(INIT, toClient, id);
+    send_message(INIT, toClient, id);
     active_clients++;
 }
 
 void stop(int clientID) {
     if (clientID >= 0 && clientID < MAX_CLIENTS) {
         char buf[MAX_MSG_LENGTH];
-        sendMessage(STOP, buf, clientID);
+        send_message(STOP, buf, clientID);
         if (clients[clientID].pid != -1)
             kill(clients[clientID].pid, SIGRTMIN);
+        if (clients[clientID].current_peer != -1) {
+            disconnect(clientID);
+        }
 
         clients[clientID].client_queue = -1;
         clients[clientID].pid = -1;
@@ -181,7 +184,7 @@ void list(int clientID) {
             strcat(response, buf);
         }
     }
-    sendMessage(LIST, response, clientID);
+    send_message(LIST, response, clientID);
 }
 
 void sendConnectMsg(char content[MAX_MSG_LENGTH], int peer_pid, int client_id) {
@@ -229,11 +232,11 @@ void disconnect(int clientID) {
 
     char response[MAX_MSG_LENGTH];
 
-    sendMessage(DISCONNECT, response, clientID);
+    send_message(DISCONNECT, response, clientID);
     int pid = -1;
     if ((pid = clients[clientID].pid) != -1)
         kill(pid, SIGRTMIN);
-    sendMessage(DISCONNECT, response, peer);
+    send_message(DISCONNECT, response, peer);
     if ((pid = clients[peer].pid) != -1)
         kill(pid, SIGRTMIN);
 

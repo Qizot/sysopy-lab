@@ -1,8 +1,3 @@
-//
-// Created by przjab98 on 27.04.19.
-//
-
-
 #include "chat.h"
 
 void raise_error(char *msg) {
@@ -15,7 +10,7 @@ void raise_detailed_error(char* msg) {
     kill(getpid(), SIGINT);
 }
 
-key_t getServerQueueKey() {
+key_t get_server_queue_key() {
     char *home = getenv("HOME");
     if (!home)
         raise_error("cannot resolve HOME \n");
@@ -26,7 +21,7 @@ key_t getServerQueueKey() {
 
 }
 
-key_t getClientQueueKey() {
+key_t get_client_queue_key() {
     char *home = getenv("HOME");
     if (!home)
         raise_error("cannot resolve HOME \n");
