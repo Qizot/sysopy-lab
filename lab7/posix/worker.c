@@ -15,9 +15,6 @@
 delivery_shop_t* shop = NULL;
 int shm_id = -1;
 sem_t* shop_sem = NULL;
-sem_t* receiver_sem = NULL;
-sem_t* packer_sem = NULL;
-sem_t* sender_sem = NULL;
 
 #define WAIT_SEMAPHORE(sem)  \
     if (sem_wait(sem) == -1) \
@@ -56,18 +53,6 @@ void prepare_semaphores() {
     shop_sem = sem_open(POSIX_SHOP_SEM, O_RDWR);
     if (shop_sem == SEM_FAILED)
         FAILURE_EXIT("Failed to open sem\n");
-
-    receiver_sem = sem_open(POSIX_RECEIVER_SEM, O_RDWR);
-    if (receiver_sem == SEM_FAILED)
-        FAILURE_EXIT("Failed to open sem\n");
-
-    packer_sem = sem_open(POSIX_PACKER_SEM, O_RDWR);
-    if (packer_sem == SEM_FAILED)
-        FAILURE_EXIT("Failed to open sem\n");
-
-    sender_sem = sem_open(POSIX_SENDER_SEM, O_RDWR);
-    if (sender_sem == SEM_FAILED)
-        FAILURE_EXIT("Failed to open sem\n");
 }
 
 void clean() {
@@ -77,13 +62,6 @@ void clean() {
 
     if (shop_sem != NULL && sem_close(shop_sem) == -1)
         FAILURE_EXIT("Failed to close sem\n");
-    if (receiver_sem != NULL && sem_close(shop_sem) == -1)
-        FAILURE_EXIT("Failed to close sem\n");
-    if (packer_sem != NULL && sem_close(packer_sem) == -1)
-        FAILURE_EXIT("Failed to close sem\n");
-    if (sender_sem != NULL && sem_close(sender_sem) == -1)
-        FAILURE_EXIT("Failed to close sem\n");
-
     log("Cleaned worker...\n");
 }
 
@@ -97,7 +75,6 @@ int receiver() {
         iterations++;
         int n = rand() % N_MAX;
 
-        WAIT_SEMAPHORE(receiver_sem)
         WAIT_SEMAPHORE(shop_sem)
 
         order_t order;
@@ -110,13 +87,11 @@ int receiver() {
         }
 
         RELEASE_SEMAPHORE(shop_sem)
-        RELEASE_SEMAPHORE(receiver_sem)
     }
 }
 
 int packer() {
     while (1) {
-        WAIT_SEMAPHORE(packer_sem)
         WAIT_SEMAPHORE(shop_sem)
 
         order_t* order = calloc(1, sizeof(order_t));
@@ -133,13 +108,11 @@ int packer() {
         free(order);
 
         RELEASE_SEMAPHORE(shop_sem)
-        RELEASE_SEMAPHORE(packer_sem)
     }
 }
 
 int sender() {
     while (1) {
-        WAIT_SEMAPHORE(sender_sem)
         WAIT_SEMAPHORE(shop_sem)
 
         order_t* order = calloc(1, sizeof(order_t));
@@ -156,7 +129,6 @@ int sender() {
         free(order);
 
         RELEASE_SEMAPHORE(shop_sem)
-        RELEASE_SEMAPHORE(sender_sem)
     }
 }
 

@@ -19,9 +19,6 @@ delivery_shop_t* shop = NULL;
 
 
 sem_t* shop_sem = NULL;
-sem_t* receiver_sem = NULL;
-sem_t* packer_sem = NULL;
-sem_t* sender_sem = NULL;
 int children_num = 0;
 int *children = NULL;
 
@@ -44,18 +41,6 @@ void create_semaphores() {
     shop_sem = sem_open(POSIX_SHOP_SEM, O_CREAT | O_EXCL, 0666, 1);
     if (shop_sem == SEM_FAILED)
         FAILURE_EXIT("Failed to create shop_sem");
-
-    receiver_sem = sem_open(POSIX_RECEIVER_SEM, O_CREAT | O_EXCL, 0666, 1);
-    if (receiver_sem == SEM_FAILED)
-        FAILURE_EXIT("Failed to create receiver_sem");
-
-    packer_sem = sem_open(POSIX_PACKER_SEM, O_CREAT | O_EXCL, 0666, 1);
-    if (packer_sem == SEM_FAILED)
-        FAILURE_EXIT("Failed to create packer_sem");
-
-    sender_sem = sem_open(POSIX_SENDER_SEM, O_CREAT | O_EXCL, 0666, 1);
-    if (sender_sem == SEM_FAILED)
-        FAILURE_EXIT("Failed to create sender_sem ");
 }
 
 
@@ -79,21 +64,6 @@ void clean() {
     if (sem_close(shop_sem) == -1)
         log("Failed to close sem\n");
     if (sem_unlink(POSIX_SHOP_SEM) == -1)
-        log("Failed to delete sem\n");
-
-    if (sem_close(receiver_sem) == -1)
-        log("Failed to close sem\n");
-    if (sem_unlink(POSIX_RECEIVER_SEM) == -1)
-        log("Failed to delete sem\n");
-
-    if (sem_close(packer_sem) == -1)
-        log("Failed to close sem\n");
-    if (sem_unlink(POSIX_PACKER_SEM) == -1)
-        log("Failed to delete sem\n");
-
-    if (sem_close(sender_sem) == -1)
-        log("Failed to close sem\n");
-    if (sem_unlink(POSIX_SENDER_SEM) == -1)
         log("Failed to delete sem\n");
     log("Deleted all semaphores\n");
 }
