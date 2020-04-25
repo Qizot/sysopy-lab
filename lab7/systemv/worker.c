@@ -85,11 +85,9 @@ int receiver() {
         int n = rand() % N_MAX;
 
         struct sembuf sops;
-        sops.sem_num = RECEIVER;
+        sops.sem_num = SHOP;
         sops.sem_flg = 0;
 
-        WAIT_SEMAPHORE(sops)
-        sops.sem_num = SHOP;
         WAIT_SEMAPHORE(sops)
 
         order_t order;
@@ -102,19 +100,15 @@ int receiver() {
         }
 
         RELEASE_SEMAPHORE(sops)
-        sops.sem_num = RECEIVER;
-        RELEASE_SEMAPHORE(sops)
     }
 }
 
 int packer() {
     while (1) {
         struct sembuf sops;
-        sops.sem_num = PACKER;
+        sops.sem_num = SHOP;
         sops.sem_flg = 0;
 
-        WAIT_SEMAPHORE(sops)
-        sops.sem_num = SHOP;
         WAIT_SEMAPHORE(sops)
 
         order_t* order = calloc(1, sizeof(order_t));
@@ -131,19 +125,15 @@ int packer() {
         free(order);
 
         RELEASE_SEMAPHORE(sops)
-        sops.sem_num = PACKER;
-        RELEASE_SEMAPHORE(sops)
     }
 }
 
 int sender() {
     while (1) {
         struct sembuf sops;
-        sops.sem_num = SENDER;
+        sops.sem_num = SHOP;
         sops.sem_flg = 0;
 
-        WAIT_SEMAPHORE(sops)
-        sops.sem_num = SHOP;
         WAIT_SEMAPHORE(sops)
 
         order_t* order = calloc(1, sizeof(order_t));
@@ -159,8 +149,6 @@ int sender() {
         }
         free(order);
 
-        RELEASE_SEMAPHORE(sops)
-        sops.sem_num = SENDER;
         RELEASE_SEMAPHORE(sops)
     }
 }

@@ -33,17 +33,12 @@ void create_fifo() {
 }
 
 void create_semaphores() {
-    sem_id = semget(fifo_key, 4, IPC_CREAT | IPC_EXCL | 0666);
+    sem_id = semget(fifo_key, 1, IPC_CREAT | IPC_EXCL | 0666);
     if (sem_id == -1)
         FAILURE_EXIT("Failed to semget");
 
-    for (int i = 1; i <= 3; i++) {
-        if (semctl(sem_id, i, SETVAL, 1) == -1)
-            FAILURE_EXIT("Failed to semctl 3 basic semaphores");
-    }
     if (semctl(sem_id, SHOP, SETVAL, 1) == -1)
         FAILURE_EXIT("Failed to semctl for SHOP sempahore");
-
 }
 
 
