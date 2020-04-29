@@ -1,0 +1,96 @@
+Testing image.pgm image
+
+
+Mode: sign Threads: 1
+Thread 140595727972096 finished in 1348 micro seconds
+Whole operation finished in 1498 micro seconds
+
+
+Mode: block Threads: 1
+Thread 140170519656192 finished in 1725 micro seconds
+Whole operation finished in 1889 micro seconds
+
+
+Mode: interleaved Threads: 1
+Thread 139636850906880 finished in 1532 micro seconds
+Whole operation finished in 1686 micro seconds
+
+
+Mode: sign Threads: 2
+Thread 139723917817600 finished in 2261 micro seconds
+Thread 139723909424896 finished in 2399 micro seconds
+Whole operation finished in 2548 micro seconds
+
+
+Mode: block Threads: 2
+Thread 140378013767424 finished in 1764 micro seconds
+Thread 140378005374720 finished in 1807 micro seconds
+Whole operation finished in 1925 micro seconds
+
+
+Mode: interleaved Threads: 2
+Thread 140044966635264 finished in 1664 micro seconds
+Thread 140044958242560 finished in 1663 micro seconds
+Whole operation finished in 1829 micro seconds
+
+
+Mode: sign Threads: 4
+Thread 140425657751296 finished in 2616 micro seconds
+Thread 140425649358592 finished in 2651 micro seconds
+Thread 140425640965888 finished in 2661 micro seconds
+Thread 140425632573184 finished in 2724 micro seconds
+Whole operation finished in 2890 micro seconds
+
+
+Mode: block Threads: 4
+Thread 140179440588544 finished in 1383 micro seconds
+Thread 140179432195840 finished in 1398 micro seconds
+Thread 140179423803136 finished in 1431 micro seconds
+Thread 140179343931136 finished in 1403 micro seconds
+Whole operation finished in 1602 micro seconds
+
+
+Mode: interleaved Threads: 4
+Thread 140456144082688 finished in 1465 micro seconds
+Thread 140456135689984 finished in 1503 micro seconds
+Thread 140456127297280 finished in 1409 micro seconds
+Thread 140456118904576 finished in 1458 micro seconds
+Whole operation finished in 1618 micro seconds
+
+
+Mode: sign Threads: 8
+Thread 140117212145408 finished in 2426 micro seconds
+Thread 140117203752704 finished in 2464 micro seconds
+Thread 140117066905344 finished in 2443 micro seconds
+Thread 140117195360000 finished in 2457 micro seconds
+Thread 140117186967296 finished in 2529 micro seconds
+Thread 140117178574592 finished in 2531 micro seconds
+Thread 140117170181888 finished in 2596 micro seconds
+Thread 140117161789184 finished in 2545 micro seconds
+Whole operation finished in 5357 micro seconds
+
+
+Mode: block Threads: 8
+Thread 140238373484288 finished in 745 micro seconds
+Thread 140238365091584 finished in 701 micro seconds
+Thread 140238356698880 finished in 685 micro seconds
+Thread 140238265513728 finished in 718 micro seconds
+Thread 140238348306176 finished in 746 micro seconds
+Thread 140238257121024 finished in 710 micro seconds
+Thread 140238248728320 finished in 702 micro seconds
+Thread 140238240335616 finished in 681 micro seconds
+Whole operation finished in 1738 micro seconds
+
+
+Mode: interleaved Threads: 8
+Thread 140187443881728 finished in 711 micro seconds
+Thread 140187435489024 finished in 712 micro seconds
+Thread 140187427096320 finished in 753 micro seconds
+Thread 140187418703616 finished in 669 micro seconds
+Thread 140187410310912 finished in 726 micro seconds
+Thread 140187329885952 finished in 670 micro seconds
+Thread 140187321493248 finished in 748 micro seconds
+Thread 140187313100544 finished in 624 micro seconds
+Whole operation finished in 1672 micro seconds
+
+
