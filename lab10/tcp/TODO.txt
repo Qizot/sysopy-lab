@@ -1,0 +1,1 @@
+disallow two clients with the same name
