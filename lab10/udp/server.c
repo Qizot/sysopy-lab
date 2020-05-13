@@ -17,6 +17,7 @@
 
 #define MAX_GAMES 50
 #define MAX_CLIENTS MAX_GAMES * 2
+#define PING_INTERVAL 5
 
 
 
@@ -104,7 +105,7 @@ void init(char* str_port, char* path) {
 
     struct sockaddr_un local_address;
     local_address.sun_family = AF_UNIX;
-    sprintf(local_address.sun_path, "%s", path);
+    strncpy(local_address.sun_path, path, sizeof(local_address.sun_path) - 1);
 
     if ((local_socket = socket(AF_UNIX, SOCK_DGRAM, 0)) < 0)
         FATAL_ERROR("Count not create local socket")
@@ -194,7 +195,7 @@ _Noreturn void ping_clients(void* _) {
             }
         }
         pthread_mutex_unlock(&mutex);
-        sleep(5);
+        sleep(PING_INTERVAL);
     }
 }
 
@@ -284,9 +285,11 @@ void manage_new_client(int socket, client_t* client) {
                     .character = 'X'
             };
 
-            send_message_to_client(socket, games[i].client_one, &msg);
+            int psocket = games[i].client_one->socket_type == NET ? net_socket : local_socket;
+            send_message_to_client(psocket, games[i].client_one, &msg);
             msg.character = 'O';
-            send_message_to_client(socket, games[i].client_two, &msg);
+            psocket = games[i].client_two->socket_type == NET ? net_socket : local_socket;
+            send_message_to_client(psocket, games[i].client_two, &msg);
         }
         return;
     }

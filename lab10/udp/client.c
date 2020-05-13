@@ -15,13 +15,11 @@
 #include <sys/stat.h>
 #include <arpa/inet.h>
 
-
-
-
 char* client_name;
 int client_socket;
 int client_id = -1;
 socket_type_t socket_type;
+struct sockaddr_un* server_address = NULL;
 
 char board[9];
 char client_character;
@@ -87,14 +85,26 @@ void init(char* name, char* connection_type, char* server_addr, char* server_por
     } else if (strcmp(connection_type, "LOCAL") == 0) {
         socket_type = LOCAL;
 
-        struct sockaddr_un local_address;
-        local_address.sun_family = AF_UNIX;
-        sprintf(local_address.sun_path, "%s", server_addr);
+        server_address = malloc(sizeof(struct sockaddr_un));
+        memset(server_address, 0, sizeof(server_address));
+        server_address->sun_family = AF_UNIX;
+        strncpy(server_address->sun_path, server_addr, sizeof(server_address->sun_path) -1);
+
+        struct sockaddr_un client_address;
+        memset(&client_address, 0, sizeof(client_address));
+        client_address.sun_family = AF_UNIX;
+        snprintf(client_address.sun_path, sizeof(client_address.sun_path) - 1,
+                 "/tmp/tic.%ld", (long) getpid());
+
         if ((client_socket = socket(AF_UNIX, SOCK_DGRAM, 0)) < 0)
             FATAL_ERROR("Failed to create unix socket")
 
-        if (connect(client_socket, &local_address, sizeof(local_address)) == -1)
-            FATAL_ERROR("Failed to connect with server")
+        if (bind(client_socket, &client_address, sizeof(client_address)) < 0)
+            FATAL_ERROR("failed to bind to client address")
+
+//        if (connect(client_socket, server_address, sizeof(*server_address)) == -1)
+//            FATAL_ERROR("Failed to connect with server")
+        log("Connected with server via local socket")
     } else {
         FATAL_ERROR("invalid connection type")
     }
@@ -334,6 +344,11 @@ void send_message(message_t *msg) {
     msg->client_id = client_id;
     msg->socket_type = socket_type;
     strcpy(msg->name, client_name);
-    if (write(client_socket, msg, sizeof(message_t)) != sizeof(message_t))
-        FATAL_ERROR("Failed to send message to server")
+    if (server_address != NULL) {
+        if (sendto(client_socket, msg, sizeof(message_t), 0, server_address, sizeof(*server_address)) != sizeof(message_t))
+            FATAL_ERROR("Failed to send message via local socket")
+    } else {
+        if (write(client_socket, msg, sizeof(message_t)) != sizeof(message_t))
+            FATAL_ERROR("failed to send message via net socket")
+    }
 }
